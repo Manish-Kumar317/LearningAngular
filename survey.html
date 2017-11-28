@@ -1,0 +1,43 @@
+<div class ="columns">
+    <div class = "column is-4"></div>
+<div class = "column is-6">
+<div class = "control has-icons-left" >
+    <input class = "input is-left search" type = "text" placeholder = "Search social network" ng-model  = "searchText.name" >
+    <span class = "icon is-small is-left">
+   <i class="fa fa-search" aria-hidden="true"></i>
+ </span>
+</div>
+<div class = "level"></div>
+<table class = "table is-bordered table is-hoverable is-center">
+    <thead>
+    <tr>
+        <th ng-click = sortData('name')>
+            Favourite Social <div ng-class= "getSortClass('name')"></div>
+        </th>
+        <th ng-click = sortData('likes')>
+            Likes <div ng-class = "getSortClass('likes')" ></div>
+        </th>
+        <th ng-click = sortData('dislikes')>
+            Dislikes <div ng-class = "getSortClass('dislikes')" ></div>
+        </th>
+        <th>Click Your Choice</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat = "fav in social | orderBy : sortColumn : reverseSort | filter : searchText">
+        <td>{{fav.name}}</td>
+        <td>{{fav.likes}}</td>
+        <td>{{fav.dislikes}}</td>
+        <td>
+            <button  class = "button is-primary is-outlined" ng-mouseover = "dislike = true" ng-mouseleave = "dislike = false" ng-click = "incrementLike(fav)" ng-disabled ="like">
+                <i class = "icon fa fa-thumbs-up"></i>
+            </button>
+            <button   class = "button is-primary is-outlined" ng-mouseover = "like = true" ng-mouseleave = "like = false" ng-click = "incrementDislike(fav)" ng-disabled ="dislike">
+                <i class = "icon fa fa-thumbs-down"></i>
+            </button>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</div>
+</div>

@@ -1,0 +1,32 @@
+<div class = "columns" controller = "adminController">
+    <div class = "column is-4"></div>
+    <div class = "column is-6">
+
+        <form class="card" xmlns="http://www.w3.org/1999/html">
+        <header class="card-header">
+            <p class="card-header-title">
+                <i class="fa fa-user" aria-hidden="true"></i>&nbsp;LOGIN
+            </p>
+        </header>
+        <div class = "card-content">
+            <div class="field">
+                <label class="label">Username</label>
+                <div class="control">
+                    <input class="input" type="text" ng-model = "username">
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Password</label>
+                <div class="control">
+                    <input class="input" type="Password" ng-model="pass">
+                </div>
+            </div>
+
+                <a href="#/admin/{{username}}/{{pass}}"><button class="customButton button is-primary" >Sign in <i class="fa fa-sign-in" aria-hidden="true"></i> </button> </a>
+
+        </div >
+
+        </form>
+
+</div>
+</div>

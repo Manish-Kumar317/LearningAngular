@@ -1,0 +1,27 @@
+<table class = "table is-bordered table is-hoverable is-center">
+    <thead>
+    <tr><th>Name</th></tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat = "fav in social">
+        <td>{{fav.name}}</td>
+    </tr>
+    </tbody>
+</table>
+<div id = "addItem" class="modal is-active">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+        <header class="modal-card-head">
+            <p class="modal-card-title">Modal title</p>
+            <button class="delete" aria-label="close" ng-click ="removeClass()"></button>
+        </header>
+        <section class="modal-card-body">
+            <input type = "text" ng-model = "name">
+        </section>
+        <footer class="modal-card-foot">
+            <button class="button is-success" ng-click = "addSocial(name)">Save changes</button>
+            <button class="button" ng-click = "removeClass()">Cancel</button>
+        </footer>
+    </div>
+</div>
+<button ng-click="logout()">Logout</button>
