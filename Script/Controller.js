@@ -1,49 +1,66 @@
-var app = angular.module("myApp",['ngRoute'])
-                 .config(function($routeProvider){
-                   $routeProvider
-                     .when('/home',{
+var app = angular.module("myApp",['ui.router'])
+                 .config(function($stateProvider, $urlMatcherFactoryProvider, $locationProvider){
 
+                     // $locationProvider.html5Mode(true);
+                     // $urlRouterProvider.otherwise({
+                     //     alert("The page requested does not exist. Redirecting to home page");
+                     //     redirectTo : '/home'
+                     // }'/home');
+                     $urlMatcherFactoryProvider.caseInsensitive(true);
+
+                   $stateProvider
+                     .state('home',{
+
+                     url : "/home" ,
                      templateUrl : "./home.html",
                      controller : "myController"
                      })
-                       .when('/survey',{
-
+                       .state('survey',{
+                           url : '/survey',
                            templateUrl : "./survey.html",
                            controller : "myController"
                        })
-                       .when('/admin',{
-
+                       .state('admin',{
+                           url : '/admin',
                            templateUrl : "./admin.html"
 
-                       })
-                       .when('/admin/:username/:pass',{
 
+                       })
+                       .state('adminDetails',{
+                           url : '/admin/:username/:pass',
                            templateUrl : "./admin.html",
                            controller : "adminController"
-                          /* resolve:{
-                               "check":function($location,$routeParams){
-                                   console.log("value"+$routeParams.username);
-                                   if($routeParams.username==="admin"&& $routeParams.pass==="admin"){
-                                      $location.path("/insert")
-                                   }else{
-                                       $location.path('/insert');    //redirect user to home.
-                                       alert("You don't have access here");
-                                   }
-                               }
-                       }*/})
-                       .when('/insert',{
+
+                       })
+                       .state('insert',{
+                           url : "/insert",
                            templateUrl : "./insert.html",
                            controller : "myController"
 
                        })
 
-                       .otherwise({
-                           redirectTo : "/home"
+                       .state("otherwise", {
+                           url: "/*path",
+                           templateUrl: "./home.html",
+                           controller : "otherwiseController"
                        })
-                 })
-    .controller("adminController",function($scope, $routeParams,$location){
 
-             if($routeParams.username==="admin"&& $routeParams.pass==="admin")
+                       .state('default', {
+                           url:'',
+                         templateUrl: './home.html'
+
+                       })
+
+
+                     // $locationProvider.html5Mode({
+                     //     enabled : true,
+                     //     // requireBase : false
+                     // });
+                 })
+    .controller("adminController",function($scope, $stateParams,$location){
+
+
+             if($stateParams.username==="admin"&& $stateParams.pass==="admin")
              {
                  $location.path("/insert")
 
@@ -61,6 +78,8 @@ var app = angular.module("myApp",['ngRoute'])
 
     })
                 .controller("myController",function($scope, $location, $anchorScroll, $timeout){
+
+
 
                     var social = [
                     {name : "Facebook", likes : 0, dislikes : 0},
@@ -133,4 +152,10 @@ var app = angular.module("myApp",['ngRoute'])
 
 
 
-                });
+                })
+                .controller('otherwiseController',function($location) {
+                    alert("The requested page does not exist. You are being redirected to homepage");
+                    $location.path('/home');
+
+                })
+
